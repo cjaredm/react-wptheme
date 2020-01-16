@@ -1,23 +1,25 @@
-import React from 'react';
+import * as React from 'react';
+import axios from 'axios';
+import xss from 'xss';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+function App(props) {
+  const [state, setState] = React.useState(null);
+  React.useEffect(() => {
+    const getStuff = async () => {
+      const {data} = await axios.get('http://react-wptheme:8888/wp-json/wp/v2/pages/2');
+      setState(data);
+      console.log(data);
+    };
+    getStuff();
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>react-src/src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div dangerouslySetInnerHTML={{__html: state && xss(state.content.rendered)}} />
       </header>
     </div>
   );
