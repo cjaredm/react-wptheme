@@ -1,28 +1,79 @@
 import * as React from 'react';
-import axios from 'axios';
-import xss from 'xss';
-import logo from './logo.svg';
+import ApolloClient from 'apollo-boost';
+import {ApolloProvider, Query} from 'react-apollo';
+import gql from 'graphql-tag';
+import {Switch, BrowserRouter, Route} from 'react-router-dom';
+import Header from './components/Header';
+// import NotFound from './components/404';
+import {Page} from './components/Page';
+import {Home} from './components/Home';
 import './App.css';
 
-function App(props) {
-  const [state, setState] = React.useState(null);
-  React.useEffect(() => {
-    const getStuff = async () => {
-      const {data} = await axios.get('http://react-wptheme:8888/wp-json/wp/v2/pages/2');
-      setState(data);
-      console.log(data);
-    };
-    getStuff();
-  }, []);
+function buildRoutes(pages = []) {
+  return pages.map(page => (
+    <Route key={page.id} component={page.isFrontPage ? Home : Page} path={page.isFrontPage ? '/' : page.uri} />
+  ));
+}
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <div dangerouslySetInnerHTML={{__html: state && xss(state.content.rendered)}} />
-      </header>
+export default () => (
+  <ApolloProvider client={client}>
+    <div id="App">
+      <Query query={META_QUERY}>{({data}) => <Content {...data} />}</Query>
     </div>
+  </ApolloProvider>
+);
+
+function Content({pages, ...props}) {
+  return (
+    <BrowserRouter>
+      <Header {...props} />
+      <Switch>
+        {buildRoutes(pages?.nodes || [])}
+        {/* <Route component={NotFound} /> */}
+      </Switch>
+    </BrowserRouter>
   );
 }
 
-export default App;
+const client = new ApolloClient({uri: `/graphql`});
+
+// https://docs.wpgraphql.com/getting-started/
+const META_QUERY = gql`
+  query META_QUERY {
+    pages {
+      nodes {
+        content
+        id
+        slug
+        title(format: RENDERED)
+        isFrontPage
+        databaseId
+        uri
+      }
+    }
+    menus(where: {id: 2}) {
+      nodes {
+        id
+        menuId
+        name
+        menuItems {
+          nodes {
+            id
+            menuItemId
+            title
+            url
+            description
+            label
+            target
+          }
+        }
+      }
+    }
+    generalSettings {
+      url
+      description
+      title
+      email
+    }
+  }
+`;

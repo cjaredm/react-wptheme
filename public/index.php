@@ -1,5 +1,18 @@
 <?php
   $TEMPLATE_PATH = parse_url(get_template_directory_uri(), PHP_URL_PATH);
+
+// function wp_api_v2_menus_get_menu_data( $data ) {
+
+// 	return 'This is what was returned';
+// }
+
+// add_action( 'rest_api_init', function () {
+// 	register_rest_route( 'jared', '/new', array(
+// 		'methods'  => 'GET',
+// 		'callback' => 'wp_api_v2_menus_get_menu_data',
+// 	) );
+// });
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
