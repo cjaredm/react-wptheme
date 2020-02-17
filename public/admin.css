@@ -1,0 +1,6 @@
+@import '../src/styles/admin.scss';
+
+.wp-block,
+.wp-block > * {
+  max-width: 100% !important;
+}

@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom';
 
 export default function({menus, generalSettings}) {
   const menuItems = menus?.nodes[0]?.menuItems?.nodes || [];
-  console.log(menus, generalSettings);
 
   const getSlug = link => link.replace(generalSettings.url, '');
   return (
@@ -26,8 +25,7 @@ export default function({menus, generalSettings}) {
   );
 }
 
-const Header = styled.header`
-  background-color: #282c34;
+const Header = styled.header.attrs({className: 'has-secondary-background-color'})`
   display: flex;
   padding: 0 25px;
   min-height: 50px;
@@ -69,5 +67,6 @@ const NavItem = styled.li`
   padding: 30px;
   a {
     color: white;
+    font-weight: bold;
   }
 `;

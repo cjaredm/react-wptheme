@@ -1,0 +1,24 @@
+$primary: #05d8ff;
+$secondary: #282c34;
+$tertiary: #fac861;
+$white: white;
+$black: black;
+
+// Gutenberg color options
+// -- see editor-color-palette in functions.php
+$colors: (primary, $primary), (secondary, $secondary), (tertiary, $tertiary), ($white, white), ($black, black);
+
+/* Color Options --------------------------------------------- */
+@each $name, $color in $colors {
+  .has-#{$name}-color {
+    color: $color;
+  }
+
+  .has-#{$name}-background-color {
+    background-color: $color;
+  }
+
+  .has-#{$name}-border-color {
+    border-color: $color;
+  }
+}

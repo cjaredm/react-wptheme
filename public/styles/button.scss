@@ -1,0 +1,98 @@
+// Default Button
+.button {
+  cursor: pointer;
+  display: inline-flex;
+  padding: 10px 20px;
+  border-radius: 2px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: $primary;
+  background-color: $primary;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  text-decoration: none;
+  transition: background-color 0.4s ease-in-out, border-color 0.4s ease-in-out;
+
+  &:hover,
+  &:focus {
+    background-color: lighten($color: $primary, $amount: 15);
+    border-color: lighten($color: $primary, $amount: 15);
+  }
+  &[disabled],
+  &.disabled {
+    opacity: 0.7;
+    cursor: default;
+    color: white;
+    background-color: $primary;
+    border-color: $primary;
+  }
+}
+
+$buttons: (primary, $primary, white), (secondary, $secondary, white), (tertiary, $tertiary, white);
+
+/* Variation & Color Options --------------------------------------------- */
+// Fill - Outline - Text
+@each $name, $color, $color2 in $buttons {
+  .button.button-fill-#{$name} {
+    color: $color2;
+    background-color: $color;
+    border-color: $color;
+
+    &:hover,
+    &:focus {
+      background-color: lighten($color, $amount: 15);
+      border-color: lighten($color, $amount: 15);
+    }
+
+    &[disabled],
+    &.disabled {
+      opacity: 0.7;
+      cursor: default;
+      color: $color2;
+      background-color: $color;
+      border-color: $color;
+    }
+  }
+
+  .button.button-outline-#{$name} {
+    color: $color;
+    background-color: transparent;
+    border-color: $color;
+
+    &:hover,
+    &:focus {
+      background-color: lighten($color, $amount: 30);
+      border-color: lighten($color, $amount: 30);
+    }
+    &[disabled],
+    &.disabled {
+      opacity: 0.7;
+      cursor: default;
+      color: $color;
+      background-color: transparent;
+      border-color: $color;
+    }
+  }
+
+  .button.button-text-#{$name} {
+    color: $color;
+    background-color: transparent;
+    border-color: transparent;
+
+    &:hover,
+    &:focus {
+      color: $color2;
+      background-color: $color;
+      border-color: $color;
+    }
+    &[disabled],
+    &.disabled {
+      opacity: 0.7;
+      cursor: default;
+      color: $color;
+      background-color: transparent;
+      border-color: transparent;
+    }
+  }
+}
