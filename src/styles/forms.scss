@@ -1,0 +1,31 @@
+.form__section,
+label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.form__group {
+  margin-bottom: 10px;
+}
+
+input[type='checkbox'],
+input[type='radio'] {
+  margin-right: 10px;
+}
+
+input[type='phone'],
+input[type='text'],
+textarea {
+  border: 2px solid $secondary;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 2px;
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 10px;
+}
+
+textarea {
+  max-width: 500px;
+}

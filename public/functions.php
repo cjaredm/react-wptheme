@@ -10,7 +10,7 @@ add_action('admin_init', 'add_editor_styles');
  */
 function custom_admin_enqueue()
 {
-  wp_enqueue_style('custom-admin', get_template_directory_uri() . '/styles/admin.css', [], '1.0');
+  wp_enqueue_style('custom-admin', get_template_directory_uri() . '/admin.css', [], '1.0');
 }
 
 add_action('admin_enqueue_scripts', 'custom_admin_enqueue', 99);

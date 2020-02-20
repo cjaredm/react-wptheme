@@ -1,4 +1,5 @@
 // Default Button
+button,
 .button {
   cursor: pointer;
   display: inline-flex;
@@ -34,6 +35,7 @@ $buttons: (primary, $primary, white), (secondary, $secondary, white), (tertiary,
 /* Variation & Color Options --------------------------------------------- */
 // Fill - Outline - Text
 @each $name, $color, $color2 in $buttons {
+  button.button-fill-#{$name},
   .button.button-fill-#{$name} {
     color: $color2;
     background-color: $color;
@@ -55,6 +57,7 @@ $buttons: (primary, $primary, white), (secondary, $secondary, white), (tertiary,
     }
   }
 
+  button.button-outline-#{$name},
   .button.button-outline-#{$name} {
     color: $color;
     background-color: transparent;
@@ -75,6 +78,7 @@ $buttons: (primary, $primary, white), (secondary, $secondary, white), (tertiary,
     }
   }
 
+  button.button-text-#{$name},
   .button.button-text-#{$name} {
     color: $color;
     background-color: transparent;
